@@ -2,6 +2,8 @@ import React from 'react';
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import MyCalendarContainer from './containers/MyCalendarContainer';
 import EventFormContainer from './containers/EventFormContainer';
+import DeleteAllContainer from './containers/DeleteAllContainer';
+import DeleteAlForDatelContainer from './containers/DeleteAlForDatelContainer';
 
 function App() {
   return (
@@ -11,6 +13,10 @@ function App() {
     }}>
       <div style={{ padding: 10}}>
         <EventFormContainer />
+        <hr />
+        <DeleteAlForDatelContainer />
+        <hr />
+        <DeleteAllContainer />
       </div>
       
       <MyCalendarContainer />

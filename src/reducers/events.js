@@ -1,87 +1,14 @@
-import { ADD_EVENT, UPDATE_EVENT, DELETE_EVENT, DELETE_ALL_EVENTS } from '../actions/constants'
+import { ADD_EVENT_SUCCESS, DELETE_EVENT, DELETE_ALL_EVENTS, UPDATE_EVENT_SUCCESS, DELETE_EVENT_FOR_DATE } from '../actions/constants'
 import moment from 'moment'
-import { v4 as uuidv4 } from 'uuid';
-
-const data = [
-  {
-    id: uuidv4(),
-    start: moment().toDate(),
-    end: moment().add(1, "days").toDate(),
-    title: "Some title",
-    city: "London",
-    color: '#22194D'
-  },
-  {
-    id: uuidv4(),
-    start: moment().toDate(),
-    end: moment().add(1, "days").toDate(),
-    title: "Some title",
-    city: "London",
-    color: '#22194D'
-  },
-  {
-    id: uuidv4(),
-    start: moment().toDate(),
-    end: moment().add(1, "days").toDate(),
-    title: "Some title",
-    city: "London",
-    color: '#22194D'
-  }, {
-    id: uuidv4(),
-    start: moment().toDate(),
-    end: moment().add(1, "days").toDate(),
-    title: "Some title",
-    city: "London",
-    color: '#22194D'
-  },
-  {
-    id: uuidv4(),
-    start: moment().toDate(),
-    end: moment().add(1, "days").toDate(),
-    title: "Some title",
-    city: "London",
-    color: '#22194D'
-  },
-  {
-    id: uuidv4(),
-    start: moment().toDate(),
-    end: moment().add(1, "days").toDate(),
-    title: "Some title",
-    city: "London",
-    color: '#22194D'
-  },
-  {
-    id: uuidv4(),
-    start: moment().toDate(),
-    end: moment().add(1, "days").toDate(),
-    title: "Some title",
-    city: "London",
-    color: '#22194D'
-  },
-  {
-    id: uuidv4(),
-    start: moment().toDate(),
-    end: moment().add(1, "days").toDate(),
-    title: "Some title",
-    city: "London",
-    color: '#22194D'
-  },
-  {
-    id: uuidv4(),
-    start: moment().toDate(),
-    end: moment().add(1, "days").toDate(),
-    title: "Some title",
-    city: "London",
-    color: '#22194D'
-  }
-]
 
 export default function events(state = [], action) {
+  console.log(action)
   switch (action.type) {
-    case ADD_EVENT: return [...state, {  ...action.payload, id: uuidv4(), }]
-    case UPDATE_EVENT: return state.map(e => e.id === action.payload.id ? action.payload : e)
+    case ADD_EVENT_SUCCESS: return [...state, action.payload]
+    case UPDATE_EVENT_SUCCESS: return state.map(e => e.id === action.payload.id ? action.payload : e)
     case DELETE_EVENT: return state.filter(e => e.id === action.payload)
     case DELETE_ALL_EVENTS: return []
+    case DELETE_EVENT_FOR_DATE: return state.filter(e => !moment(action.payload).isSame(e.start, 'day'))
     default: return state;
   }
 }

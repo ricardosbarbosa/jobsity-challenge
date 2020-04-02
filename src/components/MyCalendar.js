@@ -5,7 +5,6 @@ import moment from 'moment'
 const localizer = momentLocalizer(moment)
 
 const eventStyleGetter = (event, start, end, isSelected) => {
-  console.log(event);
   var backgroundColor = event.color;
   var style = {
       backgroundColor: backgroundColor,

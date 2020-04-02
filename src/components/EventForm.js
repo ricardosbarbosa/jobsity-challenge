@@ -18,11 +18,10 @@ const EventSchema = Yup.object().shape({
     
 });
 
-const EventForm = ({  initialValues,  onClickDeleleAll = ()=>{},  onClickDelele = ()=>{},  onSubmitForm = ()=>{}, onCancel = ()=>{}}) => (
+const EventForm = ({  initialValues,  onClickDeleleAll = ()=>{},  onClickDelele = ()=>{},  onAddEvent = ()=>{},onUpdateEvent = ()=>{}, onCancel = ()=>{}}) => (
   <div>
     <h2>Event</h2>
     <Formik
-    isInitialValid={false}
       enableReinitialize={true}
       initialValues={
         {
@@ -36,7 +35,7 @@ const EventForm = ({  initialValues,  onClickDeleleAll = ()=>{},  onClickDelele 
       validationSchema={EventSchema}
       onSubmit={(values, { setSubmitting , resetForm }) => {
         setTimeout(() => {
-          onSubmitForm(values)
+          initialValues.id ? onUpdateEvent({id: initialValues.id, ...values}) : onAddEvent(values)
           setSubmitting(false)
           resetForm({})
         }, 1000)
@@ -52,7 +51,7 @@ const EventForm = ({  initialValues,  onClickDeleleAll = ()=>{},  onClickDelele 
           <Field required component={DateTimePicker} 
           helperText={touched.start && errors.start}
           value={values.start}
-          error={touched.start && errors.start } 
+          error={touched.start && !!errors.start } 
           onBlur={handleBlur}
           onChange={(date) => {
             setFieldValue('start',moment(date))
@@ -61,7 +60,7 @@ const EventForm = ({  initialValues,  onClickDeleleAll = ()=>{},  onClickDelele 
           <Field required component={DateTimePicker} 
           helperText={ touched.end && errors.end }
           value={values.end}
-          error={errors.end && touched.end} 
+          error={touched.end && !!errors.end} 
           onBlur={handleBlur}
           onChange={(date) => {
             setFieldValue('end',moment(date))
@@ -86,10 +85,6 @@ const EventForm = ({  initialValues,  onClickDeleleAll = ()=>{},  onClickDelele 
         </Form>
       )}
     </Formik>
-    <hr />
-    <Button fullWidth color="secondary" margin="normal" onClick={onClickDeleleAll}>
-      Delete all events
-    </Button>
   </div>
 )
 export default EventForm
