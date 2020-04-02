@@ -4,7 +4,7 @@ import { DatePicker} from '@material-ui/pickers'
 import moment from 'moment'
 
 const DeleteAllEventsForDateButton = ({ onClickDeleleAllForDate = ()=>{} }) => {
-  const [date, setDate] = React.useState()
+  const [date, setDate] = React.useState(null)
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 10, alignItems: 'center'}}>
       <DatePicker required 

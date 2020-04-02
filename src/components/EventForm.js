@@ -12,13 +12,10 @@ const EventSchema = Yup.object().shape({
   title: Yup.string().min(1, 'Too Short!').max(30, 'Too Long!').required('Required'),
   city: Yup.string().min(3, 'Too Short!').max(30, 'Too Long!').required('Required'),
   color: Yup.string().required('Required'),
-  start: Yup.date().required('Required').nullable(),
-  // end: Yup.date().required('Required').min(Yup.ref('start', 'End date must be later or equal than start date')),
-  end: Yup.date().required('Required').nullable().min(Yup.ref('start', 'End date must be later or equal than start date')),
-    
+  start: Yup.date().required('Required').nullable(), 
 });
 
-const EventForm = ({  initialValues,  onClickDeleleAll = ()=>{},  onClickDelele = ()=>{},  onAddEvent = ()=>{},onUpdateEvent = ()=>{}, onCancel = ()=>{}}) => (
+const EventForm = ({  initialValues,  onClickDelele = ()=>{},  onAddEvent = ()=>{},onUpdateEvent = ()=>{}, onCancel = ()=>{}}) => (
   <div>
     <h2>Event</h2>
     <Formik
@@ -27,9 +24,8 @@ const EventForm = ({  initialValues,  onClickDeleleAll = ()=>{},  onClickDelele 
         {
           title: initialValues.title || '',
           city: initialValues.city || '',
-          color: initialValues.color || '#22194D',
+          color: initialValues.color || '#ff6900',
           start: initialValues.start || null,
-          end: initialValues.end || null,
         }
       }
       validationSchema={EventSchema}
@@ -41,32 +37,16 @@ const EventForm = ({  initialValues,  onClickDeleleAll = ()=>{},  onClickDelele 
         }, 1000)
       }}
     >
-      {({ values, errors, touched, handleBlur, handleChange, setFieldTouched, submitForm, isSubmitting, setFieldValue, isValid }) => (
+      {({ values, errors, touched, handleBlur, submitForm, isSubmitting, setFieldValue, isValid }) => (
         <Form >
           <TwitterPicker width="100%" style={{ justifyContent: 'center' }} triangle='hide' onChange={(color) => {
             setFieldValue('color', color.hex)
           }} />
           <Field required component={TextField} fullWidth name="title" type="text" label="Reminder" variant="outlined" margin="normal" size="small" multiline rows={2} inputProps={{ maxLength: 30 }} InputLabelProps={{ shrink: true }}  />
           <Field required component={TextField} fullWidth name="city" type="text" label="City" variant="outlined" margin="normal" size="small" InputLabelProps={{ shrink: true }}  />
-          <Field required component={DateTimePicker} 
-          helperText={touched.start && errors.start}
-          value={values.start}
-          error={touched.start && !!errors.start } 
-          onBlur={handleBlur}
-          onChange={(date) => {
-            setFieldValue('start',moment(date))
-          }}
-           showTodayButton fullWidth id="start" name="start" label="Start Date Time" inputVariant="outlined" margin="normal" size="small" InputLabelProps={{ shrink: true }} />
-          <Field required component={DateTimePicker} 
-          helperText={ touched.end && errors.end }
-          value={values.end}
-          error={touched.end && !!errors.end} 
-          onBlur={handleBlur}
-          onChange={(date) => {
-            setFieldValue('end',moment(date))
-          }}  showTodayButton fullWidth id="end"  name="end" label="End Date Time" inputVariant="outlined" margin="normal" size="small" InputLabelProps={{ shrink: true }}  />
-          
-          <h5>Weather: <span>Rain</span></h5>
+          <Field required component={DateTimePicker} fullWidth name="start" label="Date and time"  inputVariant="outlined" margin="normal" size="small" InputLabelProps={{ shrink: true }} 
+            helperText={touched.start && errors.start} value={values.start} error={touched.start && !!errors.start } showTodayButton
+            onBlur={handleBlur} onChange={(date) => setFieldValue('start',moment(date))} />
 
           {isSubmitting && <LinearProgress />}
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
