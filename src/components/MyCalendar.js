@@ -4,7 +4,21 @@ import moment from 'moment'
 
 const localizer = momentLocalizer(moment)
 
-const MyCalendar = ({ events = [] }) => (
+const eventStyleGetter = (event, start, end, isSelected) => {
+  console.log(event);
+  var backgroundColor = event.color;
+  var style = {
+      backgroundColor: backgroundColor,
+      borderRadius: '5px',
+      color: 'white',
+      display: 'block'
+  };
+  return {
+      style: style
+  };
+}
+
+const MyCalendar = ({ events = [], onSelectEvent = () => {} }) => (
   <Calendar
     localizer={localizer}
     defaultView="month"
@@ -14,6 +28,9 @@ const MyCalendar = ({ events = [] }) => (
     startAccessor="start"
     endAccessor="end"
     style={{ height: '100vh' }}
+    onSelectSlot={(a,b,c) => console.log(a,b,c)}
+    onSelectEvent={onSelectEvent}
+    eventPropGetter={eventStyleGetter}
   />
 )
 

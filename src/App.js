@@ -1,7 +1,7 @@
 import React from 'react';
-import MyCalendar from './containers/MyCalendar';
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import EventForm from './components/EventForm';
+import MyCalendarContainer from './containers/MyCalendarContainer';
+import EventFormContainer from './containers/EventFormContainer';
 
 function App() {
   return (
@@ -10,10 +10,10 @@ function App() {
       gridTemplateColumns: '3fr 9fr'
     }}>
       <div style={{ padding: 10}}>
-        <EventForm />
+        <EventFormContainer />
       </div>
       
-      <MyCalendar />
+      <MyCalendarContainer />
     </div>
   );
 }
