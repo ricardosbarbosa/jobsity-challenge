@@ -19,7 +19,6 @@ const eventStyleGetter = (event, start, end, isSelected) => {
 }
 
 function Event({ event }) {
-  console.log(event.weather)
   return (
     <div style={{display: 'flex', justifyContent: 'space-between'}}>
       <div>

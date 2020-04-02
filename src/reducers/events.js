@@ -2,7 +2,6 @@ import { ADD_EVENT_SUCCESS, DELETE_EVENT, DELETE_ALL_EVENTS, UPDATE_EVENT_SUCCES
 import moment from 'moment'
 
 export default function events(state = [], action) {
-  console.log(action)
   switch (action.type) {
     case ADD_EVENT_SUCCESS: return [...state, action.payload]
     case UPDATE_EVENT_SUCCESS: return state.map(e => e.id === action.payload.id ? action.payload : e)
