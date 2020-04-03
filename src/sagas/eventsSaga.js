@@ -1,6 +1,6 @@
 import { take, put, call } from 'redux-saga/effects'
-import { ADD_EVENT, UPDATE_EVENT } from "../actions/constants";
-import { addEventSuccess, updateEventSuccess} from "../actions/events";
+import { ADD_EVENT, UPDATE_EVENT, DELETE_EVENT } from "../actions/constants";
+import { addEventSuccess, updateEventSuccess, deleteEventSuccess, } from "../actions/events";
 import { clearEvent } from "../actions/editing";
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
@@ -17,10 +17,10 @@ function* getWeather(event) {
     }
     return weather
 }
+
 export function* addEventSaga() {
   while (true) {
     const { payload } = yield take(ADD_EVENT)
-    // intersept the adding event to include the id
     let weather = yield getWeather(payload)
     
     const event = {
@@ -37,7 +37,6 @@ export function* addEventSaga() {
 export function* updateEventSaga() {
   while (true) {
     const { payload } = yield take(UPDATE_EVENT)
-    // intersept the UPDATING event to CLEAR the editing state
     let weather = yield getWeather(payload)
 
     const event = {
@@ -48,6 +47,14 @@ export function* updateEventSaga() {
     }
 
     yield put(updateEventSuccess(event))
+    yield put(clearEvent())
+  }
+}
+
+export function* deleteEventSaga() {
+  while (true) {
+    const { payload } = yield take(DELETE_EVENT)
+    yield put(deleteEventSuccess(payload))
     yield put(clearEvent())
   }
 }

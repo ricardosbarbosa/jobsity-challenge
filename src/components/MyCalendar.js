@@ -1,7 +1,6 @@
 import React from "react";
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
-import { CircularProgress } from "@material-ui/core";
 
 const localizer = momentLocalizer(moment)
 

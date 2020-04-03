@@ -1,1 +1,1 @@
-export { updateEventSaga , addEventSaga} from './eventsSaga'
+export { updateEventSaga , addEventSaga, deleteEventSaga } from './eventsSaga'
