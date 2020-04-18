@@ -1,5 +1,4 @@
 import React from 'react';
-import "react-big-calendar/lib/css/react-big-calendar.css";
 import MyCalendarContainer from './containers/MyCalendarContainer';
 import EventFormContainer from './containers/EventFormContainer';
 import DeleteAllContainer from './containers/DeleteAllContainer';
@@ -11,7 +10,7 @@ function App() {
       display: 'grid',
       gridTemplateColumns: '3fr 9fr'
     }}>
-      <div style={{ padding: 10}}>
+      <div style={{ padding: 10 }}>
         <EventFormContainer />
         <hr />
         <DeleteAlForDatelContainer />

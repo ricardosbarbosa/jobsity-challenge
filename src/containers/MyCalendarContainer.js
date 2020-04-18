@@ -1,14 +1,9 @@
 import { connect } from 'react-redux'
 import MyCalendar from "../components/MyCalendar";
-import { setEvent, setDateEvent } from "../actions/editing";
+import { setEvent } from "../actions/editing";
 
-const mapStateToProps = ({ events }) => ({
-  events
-})
+const mapStateToProps = ({ events }) => ({ events })
 
-const mapDispatchToProps = {
-  onSelectEvent: setEvent,
-  onSelectSlot: setDateEvent
-}
+const mapDispatchToProps = { onSelectEvent: setEvent }
 
 export default connect(mapStateToProps,  mapDispatchToProps)(MyCalendar);
