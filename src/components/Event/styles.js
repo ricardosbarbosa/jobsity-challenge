@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const EventContainer = styled.div`
-  background-color: ${props => props.color && '#22194D'};
+  background-color: ${props => props.color};
   border-radius: 5px;
   padding: 2px;
   color: white;
